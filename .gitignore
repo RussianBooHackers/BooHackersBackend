@@ -88,3 +88,5 @@ typings/
 .dynamodb/
 
 yarn.lock
+
+package-lock.json

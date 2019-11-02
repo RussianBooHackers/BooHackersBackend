@@ -10,7 +10,7 @@ var BarSchema = new mongoose.Schema({
     "lat": Number,
     "lng": Number
   }
-});
+}, { versionKey: false });
 
 BarSchema.methods.toJSONFor = function(){
   return this;

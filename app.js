@@ -39,6 +39,8 @@ if(isProduction){
 
 require('./models/User');
 require('./models/Bars');
+require('./models/Post');
+require('./models/Photo');
 require('./config/passport');
 
 app.use(require('./routes'));

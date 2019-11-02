@@ -45,19 +45,12 @@ UserSchema.methods.toAuthJSON = function(){
     "id": this._id,
     "token": this.generateJWT(),
     "username": this.username,
-    "photo_link": this.photo_link,
+    "photo_link": "https://mysterious-plateau-80675.herokuapp.com/telega_ava.php?img=" + this.username,
     "name": this.name,
     "achievements": this.achievements,
     "boohacks": this.boohacks,
     "photos": this.photos,
     "rating": this.rating
-  };
-};
-
-UserSchema.methods.toProfileJSONFor = function(user){
-  return {
-    username: this.username,
-    photo_link: this.photo_link || 'https://static.productionready.io/images/smiley-cyrus.jpg',
   };
 };
 
