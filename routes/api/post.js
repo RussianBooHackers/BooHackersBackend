@@ -3,16 +3,18 @@ var router = require('express').Router();
 var Post = mongoose.model('Post');
 var Photo = mongoose.model('Photo');
 var auth = require('../auth');
+var photo_url = require("../../config").url
 
 router.get('/post', auth.required, function(req, res, next){
-  Bar.find({}).then(function(bars){
-      return res.json({bars})
+  Post.find({}).then(function(posts){
+      return res.json({posts})
   })
 });
 
 router.post('/post/new', auth.required, function(req, res, next){
     var photo = new Photo();
-    photo.base64 = req.body.photo;
+    photo.base64 =  new Buffer(req.body.post.photo.split(";base64,")[1], 'base64');
+    photo.contentType = req.body.post.photo.split(";base64")[0].split("data:")[1];
 
     photo.save().then(function(){
         var post = new Post();
@@ -26,7 +28,7 @@ router.post('/post/new', auth.required, function(req, res, next){
         post.bar = req.body.post.bar;
         post.boohack_id = req.body.post.boohack_id;
         post.city = req.body.post.city;
-        post.photo = `http://localhost:3000/img/${photo.getId()}`;
+        post.photo = `${photo_url}api/img/${photo.getId()}`;
 
         post.save().then(function(){
           return res.json({post: post.toJSONFor()});
