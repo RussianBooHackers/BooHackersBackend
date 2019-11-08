@@ -8,7 +8,8 @@ var PostSchema = new mongoose.Schema({
     "date": String,
     "bar": Number,
     "boohack_id": Number,
-    "city": String
+    "city": String,
+    "who_likes": Array
 });
 
 PostSchema.methods.toJSONFor = function(user){
