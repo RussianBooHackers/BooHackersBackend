@@ -26,9 +26,14 @@ router.post('/boohack/new', auth.required, function(req, res, next){
   // должно быть все ок
   boohack.bars = req.body.boohack.bars
 
-  boohack.save().then(function(){
-    return res.json({boohack: boohack.toJSONFor()});
-  }).catch(next);
+  if(boohack.bars){
+    boohack.bars = req.body.boohack.bars
+    boohack.save().then(function(){
+      return res.json({boohack: boohack.toJSONFor()});
+    }).catch(next);
+  }else{
+    console.err("BooHack bars не работает");
+  }
 });
 
 module.exports = router;
